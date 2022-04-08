@@ -1,0 +1,848 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "version": "1.7.0.6",
+            "name": "src_CX_19-002_CC2-spleen-A",
+            "runName": "2020-02-10",
+            "dateProcessed": "2020-02-10T16:01:15.357-05:00[America/New_York]",
+            "path": "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A",
+            "outputPath": "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A",
+            "objectiveType": "air",
+            "magnification": 20,
+            "aperture": 0.75,
+            "xyResolution": 377.4463383838384,
+            "zPitch": 1500.0,
+            "wavelengths": [
+                358,
+                488,
+                550,
+                650
+            ],
+            "bitDepth": 16,
+            "numRegions": 1,
+            "numCycles": 9,
+            "numZPlanes": 13,
+            "numChannels": 4,
+            "regionWidth": 9,
+            "regionHeight": 9,
+            "tileWidth": 1920,
+            "tileHeight": 1440,
+            "tileOverlapX": 0.3,
+            "tileOverlapY": 0.3,
+            "tilingMode": "snakerows",
+            "referenceCycle": 2,
+            "referenceChannel": 1,
+            "numSubTiles": 1,
+            "deconvolutionIterations": 25,
+            "deconvolutionModel": "vectorial",
+            "focusingOffset": 0,
+            "useBackgroundSubtraction": true,
+            "useDeconvolution": true,
+            "useExtendedDepthOfField": true,
+            "useShadingCorrection": true,
+            "use3dDriftCompensation": true,
+            "useBleachMinimizingCrop": false,
+            "useBlindDeconvolution": false,
+            "useDiagnosticMode": true,
+            "channelNames": {
+                "channelNamesArray": [
+                    "DAPI-01",
+                    "Blank",
+                    "Blank",
+                    "Blank",
+                    "DAPI-02",
+                    "CD31",
+                    "CD8",
+                    "CD45",
+                    "DAPI-03",
+                    "CD20",
+                    "Ki67",
+                    "CD3e",
+                    "DAPI-04",
+                    "Actin",
+                    "Podoplan",
+                    "CD68",
+                    "DAPI-05",
+                    "PanCK",
+                    "CD21",
+                    "CD4",
+                    "DAPI-06",
+                    "Empty",
+                    "CD45RO",
+                    "CD11c",
+                    "DAPI-07",
+                    "Empty",
+                    "E-CAD",
+                    "CD107a",
+                    "DAPI-08",
+                    "Empty",
+                    "CD44",
+                    "H3",
+                    "DAPI-09",
+                    "Blank",
+                    "Blank",
+                    "Blank"
+                ]
+            },
+            "exposureTimes": {
+                "exposureTimesArray": [
+                    [
+                        "Cycle",
+                        "CH1",
+                        "CH2",
+                        "CH3",
+                        "CH4"
+                    ],
+                    [
+                        "1",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "2",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "3",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "4",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "5",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "6",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "7",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "8",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ],
+                    [
+                        "9",
+                        "10",
+                        "500",
+                        "350",
+                        "500"
+                    ]
+                ]
+            },
+            "projName": "src_CX_19-002_CC2-spleen-A",
+            "regIdx": [
+                1
+            ],
+            "cycle_lower_limit": 1,
+            "cycle_upper_limit": 9,
+            "num_z_planes": 1,
+            "region_width": 9,
+            "region_height": 9,
+            "tile_width": 1344,
+            "tile_height": 1008
+        }
+    ],
+    "required": [
+        "version",
+        "name",
+        "runName",
+        "dateProcessed",
+        "path",
+        "outputPath",
+        "objectiveType",
+        "magnification",
+        "aperture",
+        "xyResolution",
+        "zPitch",
+        "wavelengths",
+        "bitDepth",
+        "numRegions",
+        "numCycles",
+        "numZPlanes",
+        "numChannels",
+        "regionWidth",
+        "regionHeight",
+        "tileWidth",
+        "tileHeight",
+        "tileOverlapX",
+        "tileOverlapY",
+        "tilingMode",
+        "referenceCycle",
+        "referenceChannel",
+        "numSubTiles",
+        "channelNames",
+        "exposureTimes"
+    ],
+    "properties": {
+        "version": {
+            "$id": "#/properties/version",
+            "type": "string",
+            "title": "The version schema",
+            "description": "Version of Akoya software",
+            "default": "",
+            "examples": [
+                "1.7.0.6"
+            ]
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "Experiment name",
+            "default": "",
+            "examples": [
+                "src_CX_19-002_CC2-spleen-A"
+            ]
+        },
+        "runName": {
+            "$id": "#/properties/runName",
+            "type": "string",
+            "title": "The runName schema",
+            "description": "Name of run",
+            "default": "",
+            "examples": [
+                "2020-02-10"
+            ]
+        },
+        "dateProcessed": {
+            "$id": "#/properties/dateProcessed",
+            "type": "string",
+            "title": "The dateProcessed schema",
+            "description": "Date of processing",
+            "default": "",
+            "examples": [
+                "2020-02-10T16:01:15.357-05:00[America/New_York]"
+            ]
+        },
+        "path": {
+            "$id": "#/properties/path",
+            "type": "string",
+            "title": "The path schema",
+            "description": "TMC internal path to the dataset",
+            "default": "",
+            "examples": [
+                "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A"
+            ]
+        },
+        "outputPath": {
+            "$id": "#/properties/outputPath",
+            "type": "string",
+            "title": "The outputPath schema",
+            "description": "TMC internal path to the dataset",
+            "default": "",
+            "examples": [
+                "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A"
+            ]
+        },
+        "objectiveType": {
+            "$id": "#/properties/objectiveType",
+            "type": "string",
+            "title": "The objectiveType schema",
+            "description": "Objective type",
+            "default": "",
+            "examples": [
+                "air"
+            ]
+        },
+        "magnification": {
+            "$id": "#/properties/magnification",
+            "type": "integer",
+            "title": "The magnification schema",
+            "description": "Objective magnification",
+            "default": 0,
+            "examples": [
+                20
+            ]
+        },
+        "aperture": {
+            "$id": "#/properties/aperture",
+            "type": "number",
+            "title": "The aperture schema",
+            "description": "Aperture number",
+            "default": 0.0,
+            "examples": [
+                0.75
+            ]
+        },
+        "xyResolution": {
+            "$id": "#/properties/xyResolution",
+            "type": "number",
+            "title": "The xyResolution schema",
+            "description": "Lateral resolution",
+            "default": 0.0,
+            "examples": [
+                377.4463383838384
+            ]
+        },
+        "zPitch": {
+            "$id": "#/properties/zPitch",
+            "type": "number",
+            "title": "The zPitch schema",
+            "description": "Axial resolution",
+            "default": 0.0,
+            "examples": [
+                1500.0
+            ]
+        },
+        "wavelengths": {
+            "$id": "#/properties/wavelengths",
+            "type": "array",
+            "title": "The wavelengths schema",
+            "description": "Emission wavelengths",
+            "items": {"type": "integer"},
+            "default": [],
+            "examples": [
+                [
+                    358,
+                    488
+                ]
+            ]
+        },
+        "bitDepth": {
+            "$id": "#/properties/bitDepth",
+            "type": "integer",
+            "title": "The bitDepth schema",
+            "description": "Image bit depth",
+            "multipleOf": 2,
+            "default": 16,
+            "examples": [
+                16
+            ]
+        },
+        "numRegions": {
+            "$id": "#/properties/numRegions",
+            "type": "integer",
+            "title": "The numRegions schema",
+            "description": "Number of regions",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                1
+            ]
+        },
+        "numCycles": {
+            "$id": "#/properties/numCycles",
+            "type": "integer",
+            "title": "The numCycles schema",
+            "description": "Number of cycles",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "numZPlanes": {
+            "$id": "#/properties/numZPlanes",
+            "type": "integer",
+            "title": "The numZPlanes schema",
+            "description": "Number of z-planes",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                13
+            ]
+        },
+        "numChannels": {
+            "$id": "#/properties/numChannels",
+            "type": "integer",
+            "title": "The numChannels schema",
+            "description": "Number of channels",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                4
+            ]
+        },
+        "regionWidth": {
+            "$id": "#/properties/regionWidth",
+            "type": "integer",
+            "title": "The regionWidth schema",
+            "description": "Number of tiles in x direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "regionHeight": {
+            "$id": "#/properties/regionHeight",
+            "type": "integer",
+            "title": "The regionHeight schema",
+            "description": "Number of tiles in y direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "tileWidth": {
+            "$id": "#/properties/tileWidth",
+            "type": "integer",
+            "title": "The tileWidth schema",
+            "description": "Tile width with overlap",
+            "default": 1,
+            "examples": [
+                1920
+            ]
+        },
+        "tileHeight": {
+            "$id": "#/properties/tileHeight",
+            "type": "integer",
+            "title": "The tileHeight schema",
+            "description": "Tile height with overlap",
+            "default": 1,
+            "examples": [
+                1440
+            ]
+        },
+        "tileOverlapX": {
+            "$id": "#/properties/tileOverlapX",
+            "type": "number",
+            "title": "The tileOverlapX schema",
+            "description": "Horizontal overlap between adjacent tiles in fractions of 1",
+            "default": 0.0,
+            "examples": [
+                0.3
+            ]
+        },
+        "tileOverlapY": {
+            "$id": "#/properties/tileOverlapY",
+            "type": "number",
+            "title": "The tileOverlapY schema",
+            "description": "Vertical overlap between adjacent tiles in fractions of 1",
+            "default": 0.0,
+            "examples": [
+                0.3
+            ]
+        },
+        "tilingMode": {
+            "$id": "#/properties/tilingMode",
+            "type": "string",
+            "title": "The tilingMode schema",
+            "description": "Tiling mode snake, grid, maybe something else",
+            "default": "",
+            "examples": [
+                "snakerows"
+            ]
+        },
+        "referenceCycle": {
+            "$id": "#/properties/referenceCycle",
+            "type": "integer",
+            "title": "The referenceCycle schema",
+            "description": "Cycle with reference channel",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                2
+            ]
+        },
+        "referenceChannel": {
+            "$id": "#/properties/referenceChannel",
+            "type": "integer",
+            "title": "The referenceChannel schema",
+            "description": "Channel to be used as a reference for processing and segmentation",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                1
+            ]
+        },
+        "numSubTiles": {
+            "$id": "#/properties/numSubTiles",
+            "type": "integer",
+            "title": "The numSubTiles schema",
+            "description": "Not sure what subtile is, should be 1",
+            "default": 1,
+            "maximum": 1,
+            "examples": [
+                1
+            ]
+        },
+        "deconvolutionIterations": {
+            "$id": "#/properties/deconvolutionIterations",
+            "type": "integer",
+            "title": "The deconvolutionIterations schema",
+            "description": "TMC - Number of deconvolution iterations",
+            "default": 0,
+            "examples": [
+                25
+            ]
+        },
+        "deconvolutionModel": {
+            "$id": "#/properties/deconvolutionModel",
+            "type": "string",
+            "title": "The deconvolutionModel schema",
+            "description": "TMC - Deconvolution model",
+            "default": "",
+            "examples": [
+                "vectorial"
+            ]
+        },
+        "focusingOffset": {
+            "$id": "#/properties/focusingOffset",
+            "type": "integer",
+            "title": "The focusingOffset schema",
+            "description": "TMC - I have no idea what it is, usually 0",
+            "default": 0,
+            "examples": [
+                0
+            ]
+        },
+        "useBackgroundSubtraction": {
+            "$id": "#/properties/useBackgroundSubtraction",
+            "type": "boolean",
+            "title": "The useBackgroundSubtraction schema",
+            "description": "TMC - if background subtraction is used",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "useDeconvolution": {
+            "$id": "#/properties/useDeconvolution",
+            "type": "boolean",
+            "title": "The useDeconvolution schema",
+            "description": "TMC - whether deconvolution is used for internal processing",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "useExtendedDepthOfField": {
+            "$id": "#/properties/useExtendedDepthOfField",
+            "type": "boolean",
+            "title": "The useExtendedDepthOfField schema",
+            "description": "TMC - whether edof is used for internal processing",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "useShadingCorrection": {
+            "$id": "#/properties/useShadingCorrection",
+            "type": "boolean",
+            "title": "The useShadingCorrection schema",
+            "description": "TMC - whether shading correction is used for internal processing",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "use3dDriftCompensation": {
+            "$id": "#/properties/use3dDriftCompensation",
+            "type": "boolean",
+            "title": "The use3dDriftCompensation schema",
+            "description": "TMC - whether 3D registration is used for internal processing",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "useBleachMinimizingCrop": {
+            "$id": "#/properties/useBleachMinimizingCrop",
+            "type": "boolean",
+            "title": "The useBleachMinimizingCrop schema",
+            "description": "TMC - some internal parameters",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "useBlindDeconvolution": {
+            "$id": "#/properties/useBlindDeconvolution",
+            "type": "boolean",
+            "title": "The useBlindDeconvolution schema",
+            "description": "TMC - some internal parameters",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "useDiagnosticMode": {
+            "$id": "#/properties/useDiagnosticMode",
+            "type": "boolean",
+            "title": "The useDiagnosticMode schema",
+            "description": "TMC - some internal parameters",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "channelNames": {
+            "$id": "#/properties/channelNames",
+            "type": "object",
+            "title": "The channelNames schema",
+            "description": "List of names across cycles",
+            "default": {},
+            "examples": [
+                {
+                    "channelNamesArray": [
+                        "DAPI-01",
+                        "Blank",
+                        "Blank",
+                        "Blank",
+                        "DAPI-02",
+                        "CD31",
+                        "CD8",
+                        "CD45"
+                    ]
+                }
+            ],
+            "required": [
+                "channelNamesArray"
+            ],
+            "properties": {
+                "channelNamesArray": {
+                    "$id": "#/properties/channelNames/properties/channelNamesArray",
+                    "type": "array",
+                    "title": "The channelNamesArray schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "items": {"type": "string", "pattern": "^[A-Za-z0-9_. /-]*$"},
+                    "default": [],
+                    "examples": [
+                        [
+                            "DAPI-01",
+                            "Blank"
+                        ]
+                    ]
+                  }
+                }
+        },
+        "exposureTimes": {
+            "$id": "#/properties/exposureTimes",
+            "type": "object",
+            "title": "The exposureTimes schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "exposureTimesArray": [
+                        [
+                            "Cycle",
+                            "CH1",
+                            "CH2",
+                            "CH3",
+                            "CH4"
+                        ],
+                        [
+                            "1",
+                            "10",
+                            "500",
+                            "350",
+                            "500"
+                        ],
+                        [
+                            "2",
+                            "10",
+                            "500",
+                            "350",
+                            "500"
+                        ]
+                    ]
+                }
+            ],
+            "required": [
+                "exposureTimesArray"
+            ],
+            "properties": {
+                "exposureTimesArray": {
+                    "$id": "#/properties/exposureTimes/properties/exposureTimesArray",
+                    "type": "array",
+                    "title": "The exposureTimesArray schema",
+                    "description": "List of exposure times for each cycle and channel",
+                    "minItems": 2,
+                    "default": [],
+                    "examples": [
+                        [
+                            [
+                                "Cycle",
+                                "CH1",
+                                "CH2",
+                                "CH3",
+                                "CH4"
+                            ],
+                            [
+                                "1",
+                                "10",
+                                "500",
+                                "350",
+                                "500"
+                            ]
+                        ]
+                    ],
+                    "items": {
+                        "$id": "#/properties/exposureTimes/properties/exposureTimesArray/items",
+                        "anyOf": [
+                            {
+                                "$id": "#/properties/exposureTimes/properties/exposureTimesArray/items/anyOf/0",
+                                "type": "array",
+                                "title": "The first anyOf schema",
+                                "description": "Names of fields",
+                                "items":{"type": "string"},
+                                "default": [],
+                                "examples": [
+                                    [
+                                        "Cycle",
+                                        "CH1"
+                                    ]
+                                ]
+                            },
+                            {
+                                "$id": "#/properties/exposureTimes/properties/exposureTimesArray/items/anyOf/1",
+                                "type": "array",
+                                "title": "The second anyOf schema",
+                                "description": "Cycle id and exposure time",
+                                "items":{"type": "string"},
+                                "default": [],
+                                "examples": [
+                                    [
+                                        "1",
+                                        "750"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "projName": {
+            "$id": "#/properties/projName",
+            "type": "string",
+            "title": "The projName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "src_CX_19-002_CC2-spleen-A"
+            ]
+        },
+        "regIdx": {
+            "$id": "#/properties/regIdx",
+            "type": "array",
+            "title": "The regIdx schema",
+            "description": "Region ids",
+            "items": {"type": "integer"},
+            "uniqueItems": true,
+            "minimum": 1,
+            "default": [1],
+            "examples": [
+                [
+                    1,2,3
+                ]
+            ]
+        },
+        "cycle_lower_limit": {
+            "$id": "#/properties/cycle_lower_limit",
+            "type": "integer",
+            "title": "The cycle_lower_limit schema",
+            "description": "First cycle id in the dataset",
+            "minimum":1,
+            "default": 1,
+            "examples": [
+                1
+            ]
+        },
+        "cycle_upper_limit": {
+            "$id": "#/properties/cycle_upper_limit",
+            "type": "integer",
+            "title": "The cycle_upper_limit schema",
+            "description": "Maximum cycle id the dataset",
+            "minimum":1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "num_z_planes": {
+            "$id": "#/properties/num_z_planes",
+            "type": "integer",
+            "title": "The num_z_planes schema",
+            "description": "Number of z-planes",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                1
+            ]
+        },
+        "region_width": {
+            "$id": "#/properties/region_width",
+            "type": "integer",
+            "title": "The region_width schema",
+            "description": "Number of tiles in x direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "region_height": {
+            "$id": "#/properties/region_height",
+            "type": "integer",
+            "title": "The region_height schema",
+            "description": "Number of tiles in y direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "tile_width": {
+            "$id": "#/properties/tile_width",
+            "type": "integer",
+            "title": "The tile_width schema",
+            "description": "Tile width without overlap",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                1344
+            ]
+        },
+        "tile_height": {
+            "$id": "#/properties/tile_height",
+            "type": "integer",
+            "title": "The tile_height schema",
+            "description": "Tile height without overlap",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                1008
+            ]
+        }
+    },
+    "additionalProperties": true
+}

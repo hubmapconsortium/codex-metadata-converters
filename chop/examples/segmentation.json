@@ -1,0 +1,23 @@
+{
+  "version": "1.7.0.6",
+  "bitDepth": 16,
+  "radius": 6,
+  "nuclearStainCycle": 2,
+  "nuclearStainChannel": 1,
+  "membraneStainCycle": 5,
+  "membraneStainChannel": 4,
+  "numConcentricCircles": 0,
+  "minCutoff": 0.02,
+  "maxCutoff": 0.99,
+  "relativeCutoff": 0.01,
+  "sizeCutoffFactor": 0.1,
+  "innerRingSize": 1.0,
+  "useSpilloverCompensation": true,
+  "useMembraneStain": false,
+  "useAnisotropicRegionGrowth": true,
+  "useDelaunayTriangulation": false,
+  "inverseMembraneStain": false,
+  "subtractInnerRing": false,
+  "countPuncta": false,
+  "useTsne": false
+}
