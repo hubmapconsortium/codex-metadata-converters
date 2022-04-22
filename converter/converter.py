@@ -77,9 +77,27 @@ def read_int_if_can(in_str: str) -> Union[int, str]:
         return in_str
 
 
-def check_metadata_present(dataset_path: Path):
+def get_experiment_json_name(dataset_path: Path) -> str:
+    variants = (r"experiment\.json", r"Experiment\.json")
+    listing = list(dataset_path.iterdir())
+    found = []
+    for item in listing:
+        for var in variants:
+            matched = re.match(var, item.name)
+            if matched:
+                found.append(matched.string)
+    if len(found) > 1:
+        msg = "Found several options of experiment file: " + str(variants)
+        raise ValueError(msg)
+    elif len(found) == 0:
+        msg = "File experiment json is not found."
+        raise ValueError(msg)
+    else:
+        return found[0]
+
+
+def check_other_metadata_present(dataset_path: Path):
     required_files = [
-        "experiment.json",
         "segmentation.json",
         "missing1.xlsx",
         "missing2.xlsx",
@@ -530,9 +548,10 @@ def convert_metadata(dataset_path: Path, out_path: Path):
         logger.info(f"Output directory {out_path} does not exist. Will create new.")
         make_dir_if_not_exists(out_path)
 
-    check_metadata_present(dataset_path)
+    experiment_json_name = get_experiment_json_name(dataset_path)
+    check_other_metadata_present(dataset_path)
 
-    exp_path = dataset_path / "experiment.json"
+    exp_path = dataset_path / experiment_json_name
     seg_path = dataset_path / "segmentation.json"
     missing1_meta_path = dataset_path / "missing1.xlsx"
     missing2_meta_path = dataset_path / "missing2.xlsx"
