@@ -7,15 +7,14 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
-from packaging import version
 
 import jsonschema
 import numpy as np
 import pandas as pd
+from packaging import version
 
 from dataset_listing import create_listing_for_each_cycle_region
 from schema_container import dataset_schema, get_experiment_metadata_schema
-
 
 
 def make_dir_if_not_exists(dir_path: Path):
@@ -388,7 +387,9 @@ def get_nuc_and_membr_markers(
     return nuclear_stain, membrane_stain
 
 
-def read_exposure_times_table(exposure_times_table_path: Path) -> Union[None, List[List[Union[str, int]]]]:
+def read_exposure_times_table(
+    exposure_times_table_path: Path,
+) -> Union[None, List[List[Union[str, int]]]]:
     if not exposure_times_table_path.exists():
         return None
     exp_times = pd.read_csv(exposure_times_table_path, header=None)
@@ -400,15 +401,19 @@ def read_exposure_times_table(exposure_times_table_path: Path) -> Union[None, Li
     return exposure_times
 
 
-def get_exposure_times(exp_metadata: dict, exposure_times_table: Union[None, pd.DataFrame] = None) -> List[List[Union[str, int]]]:
+def get_exposure_times(
+    exp_metadata: dict, exposure_times_table: Union[None, pd.DataFrame] = None
+) -> List[List[Union[str, int]]]:
     if exp_metadata.get("exposureTimes", None) is not None:
         exposure_times = exp_metadata["exposureTimes"]["exposureTimesArray"]
     else:
         if exposure_times_table is not None:
             exposure_times = exposure_times_table
         else:
-            msg = ("Tried to look in the experiment.json and exposure_times.txt"
-                   + " But did not find exposure time information.")
+            msg = (
+                "Tried to look in the experiment.json and exposure_times.txt"
+                + " But did not find exposure time information."
+            )
             raise ValueError(msg)
     return exposure_times
 

@@ -1,4 +1,5 @@
 import json
+
 from packaging import version
 
 _dataset_schema_str = """{
@@ -2023,6 +2024,8 @@ def get_experiment_metadata_schema(metadata: dict):
     elif version.parse(ver) >= version.parse("1.5") < version.parse("1.7"):
         return experiment_1_5_schema
     else:
-        msg = (f"The version {str(ver)} of experiment.json is not supported."
-               + "Supported version are 1.5 and 1.7")
+        msg = (
+            f"The version {str(ver)} of experiment.json is not supported."
+            + "Supported version are 1.5 and 1.7"
+        )
         raise NotImplementedError(msg)
