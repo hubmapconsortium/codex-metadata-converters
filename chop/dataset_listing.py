@@ -28,7 +28,7 @@ def alpha_num_order(string: str) -> str:
 
 def get_img_listing(in_dir: Path) -> List[Path]:
     allowed_extensions = (".tif", ".tiff")
-    listing = list(in_dir.iterdir())
+    listing = list(in_dir.glob("?_?????_Z???_CH*.tif*"))
     img_listing = [f for f in listing if f.suffix in allowed_extensions]
     img_listing = sorted(img_listing, key=lambda x: alpha_num_order(x.name))
     return img_listing
@@ -50,7 +50,7 @@ def arrange_listing_by_channel_tile_zplane(
         if len(digits) < 4:
             msg = (
                 f"This file has unexpected name {str(file_path)}. "
-                + "Only images tat follow this pattern 1_00001_Z02_CH3.tif are expected."
+                + "Only images that follow this pattern 1_00001_Z02_CH3.tif are expected."
             )
             raise ValueError(msg)
         tile = digits[1]
