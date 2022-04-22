@@ -22,10 +22,12 @@ dependencies:
     - jsonschema==4.4.0
     - numpy==1.22.3
     - openpyxl==3.0.9
+    - packaging==21.3
     - pandas==1.4.2
     - pefile==2021.9.3
     - pyinstaller==4.10
     - pyinstaller-hooks-contrib==2022.3
+    - pyparsing==3.0.8
     - pyrsistent==0.18.1
     - python-dateutil==2.8.2
     - pytz==2022.1

@@ -11,8 +11,8 @@
             "name": "src_CX_19-002_CC2-spleen-A",
             "runName": "2020-02-10",
             "dateProcessed": "2020-02-10T16:01:15.357-05:00[America/New_York]",
-            "path": "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A",
-            "outputPath": "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A",
+            "path": "G:/SHARE/HuBMAP/Codex_dataset_hubmap/src_CX_19-002_CC2-spleen-A",
+            "outputPath": "G:/SHARE/HuBMAP/Codex_dataset_hubmap/src_CX_19-002_CC2-spleen-A",
             "objectiveType": "air",
             "magnification": 20,
             "aperture": 0.75,
@@ -182,8 +182,6 @@
         "name",
         "runName",
         "dateProcessed",
-        "path",
-        "outputPath",
         "objectiveType",
         "magnification",
         "aperture",
@@ -247,26 +245,6 @@
             "default": "",
             "examples": [
                 "2020-02-10T16:01:15.357-05:00[America/New_York]"
-            ]
-        },
-        "path": {
-            "$id": "#/properties/path",
-            "type": "string",
-            "title": "The path schema",
-            "description": "TMC internal path to the dataset",
-            "default": "",
-            "examples": [
-                "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A"
-            ]
-        },
-        "outputPath": {
-            "$id": "#/properties/outputPath",
-            "type": "string",
-            "title": "The outputPath schema",
-            "description": "TMC internal path to the dataset",
-            "default": "",
-            "examples": [
-                "G:\\SHARE\\HuBMAP\\Codex_dataset_hubmap\\src_CX_19-002_CC2-spleen-A"
             ]
         },
         "objectiveType": {
@@ -491,116 +469,6 @@
             "maximum": 1,
             "examples": [
                 1
-            ]
-        },
-        "deconvolutionIterations": {
-            "$id": "#/properties/deconvolutionIterations",
-            "type": "integer",
-            "title": "The deconvolutionIterations schema",
-            "description": "TMC - Number of deconvolution iterations",
-            "default": 0,
-            "examples": [
-                25
-            ]
-        },
-        "deconvolutionModel": {
-            "$id": "#/properties/deconvolutionModel",
-            "type": "string",
-            "title": "The deconvolutionModel schema",
-            "description": "TMC - Deconvolution model",
-            "default": "",
-            "examples": [
-                "vectorial"
-            ]
-        },
-        "focusingOffset": {
-            "$id": "#/properties/focusingOffset",
-            "type": "integer",
-            "title": "The focusingOffset schema",
-            "description": "TMC - I have no idea what it is, usually 0",
-            "default": 0,
-            "examples": [
-                0
-            ]
-        },
-        "useBackgroundSubtraction": {
-            "$id": "#/properties/useBackgroundSubtraction",
-            "type": "boolean",
-            "title": "The useBackgroundSubtraction schema",
-            "description": "TMC - if background subtraction is used",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useDeconvolution": {
-            "$id": "#/properties/useDeconvolution",
-            "type": "boolean",
-            "title": "The useDeconvolution schema",
-            "description": "TMC - whether deconvolution is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useExtendedDepthOfField": {
-            "$id": "#/properties/useExtendedDepthOfField",
-            "type": "boolean",
-            "title": "The useExtendedDepthOfField schema",
-            "description": "TMC - whether edof is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useShadingCorrection": {
-            "$id": "#/properties/useShadingCorrection",
-            "type": "boolean",
-            "title": "The useShadingCorrection schema",
-            "description": "TMC - whether shading correction is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "use3dDriftCompensation": {
-            "$id": "#/properties/use3dDriftCompensation",
-            "type": "boolean",
-            "title": "The use3dDriftCompensation schema",
-            "description": "TMC - whether 3D registration is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useBleachMinimizingCrop": {
-            "$id": "#/properties/useBleachMinimizingCrop",
-            "type": "boolean",
-            "title": "The useBleachMinimizingCrop schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                false
-            ]
-        },
-        "useBlindDeconvolution": {
-            "$id": "#/properties/useBlindDeconvolution",
-            "type": "boolean",
-            "title": "The useBlindDeconvolution schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                false
-            ]
-        },
-        "useDiagnosticMode": {
-            "$id": "#/properties/useDiagnosticMode",
-            "type": "boolean",
-            "title": "The useDiagnosticMode schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                true
             ]
         },
         "channelNames": {

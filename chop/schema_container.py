@@ -1,4 +1,5 @@
 import json
+from packaging import version
 
 _dataset_schema_str = """{
     "$schema": "http://json-schema.org/draft-07/schema",
@@ -890,7 +891,7 @@ _dataset_schema_str = """{
 }
 """
 
-_experiment_schema_str = """{
+_experiment_1_7_schema_str = """{
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "http://example.com/example.json",
     "type": "object",
@@ -1074,8 +1075,6 @@ _experiment_schema_str = """{
         "name",
         "runName",
         "dateProcessed",
-        "path",
-        "outputPath",
         "objectiveType",
         "magnification",
         "aperture",
@@ -1139,26 +1138,6 @@ _experiment_schema_str = """{
             "default": "",
             "examples": [
                 "2020-02-10T16:01:15.357-05:00[America/New_York]"
-            ]
-        },
-        "path": {
-            "$id": "#/properties/path",
-            "type": "string",
-            "title": "The path schema",
-            "description": "TMC internal path to the dataset",
-            "default": "",
-            "examples": [
-                "G:/SHARE/HuBMAP/Codex_dataset_hubmap/src_CX_19-002_CC2-spleen-A"
-            ]
-        },
-        "outputPath": {
-            "$id": "#/properties/outputPath",
-            "type": "string",
-            "title": "The outputPath schema",
-            "description": "TMC internal path to the dataset",
-            "default": "",
-            "examples": [
-                "G:/SHARE/HuBMAP/Codex_dataset_hubmap/src_CX_19-002_CC2-spleen-A"
             ]
         },
         "objectiveType": {
@@ -1383,116 +1362,6 @@ _experiment_schema_str = """{
             "maximum": 1,
             "examples": [
                 1
-            ]
-        },
-        "deconvolutionIterations": {
-            "$id": "#/properties/deconvolutionIterations",
-            "type": "integer",
-            "title": "The deconvolutionIterations schema",
-            "description": "TMC - Number of deconvolution iterations",
-            "default": 0,
-            "examples": [
-                25
-            ]
-        },
-        "deconvolutionModel": {
-            "$id": "#/properties/deconvolutionModel",
-            "type": "string",
-            "title": "The deconvolutionModel schema",
-            "description": "TMC - Deconvolution model",
-            "default": "",
-            "examples": [
-                "vectorial"
-            ]
-        },
-        "focusingOffset": {
-            "$id": "#/properties/focusingOffset",
-            "type": "integer",
-            "title": "The focusingOffset schema",
-            "description": "TMC - I have no idea what it is, usually 0",
-            "default": 0,
-            "examples": [
-                0
-            ]
-        },
-        "useBackgroundSubtraction": {
-            "$id": "#/properties/useBackgroundSubtraction",
-            "type": "boolean",
-            "title": "The useBackgroundSubtraction schema",
-            "description": "TMC - if background subtraction is used",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useDeconvolution": {
-            "$id": "#/properties/useDeconvolution",
-            "type": "boolean",
-            "title": "The useDeconvolution schema",
-            "description": "TMC - whether deconvolution is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useExtendedDepthOfField": {
-            "$id": "#/properties/useExtendedDepthOfField",
-            "type": "boolean",
-            "title": "The useExtendedDepthOfField schema",
-            "description": "TMC - whether edof is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useShadingCorrection": {
-            "$id": "#/properties/useShadingCorrection",
-            "type": "boolean",
-            "title": "The useShadingCorrection schema",
-            "description": "TMC - whether shading correction is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "use3dDriftCompensation": {
-            "$id": "#/properties/use3dDriftCompensation",
-            "type": "boolean",
-            "title": "The use3dDriftCompensation schema",
-            "description": "TMC - whether 3D registration is used for internal processing",
-            "default": false,
-            "examples": [
-                true
-            ]
-        },
-        "useBleachMinimizingCrop": {
-            "$id": "#/properties/useBleachMinimizingCrop",
-            "type": "boolean",
-            "title": "The useBleachMinimizingCrop schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                false
-            ]
-        },
-        "useBlindDeconvolution": {
-            "$id": "#/properties/useBlindDeconvolution",
-            "type": "boolean",
-            "title": "The useBlindDeconvolution schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                false
-            ]
-        },
-        "useDiagnosticMode": {
-            "$id": "#/properties/useDiagnosticMode",
-            "type": "boolean",
-            "title": "The useDiagnosticMode schema",
-            "description": "TMC - some internal parameters",
-            "default": false,
-            "examples": [
-                true
             ]
         },
         "channelNames": {
@@ -1740,6 +1609,421 @@ _experiment_schema_str = """{
 }
 """
 
+_experiment_1_5_schema_str = """{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+          "version": "1.5.0.38",
+          "name": "19-001_SP_CC2-A_03232021",
+          "dateProcessed": "2021-03-24T08:51:26.7853506-04:00",
+          "path": "F:/RUNS_1",
+          "outputPath": "",
+          "objectiveType": "air",
+          "magnification": 20,
+          "aperture": 0.75,
+          "xyResolution": 377.44633838383839,
+          "zPitch": 1500.0,
+          "wavelengths": [
+            358,
+            488,
+            550,
+            650
+          ],
+          "bitness": 16,
+          "numRegions": 1,
+          "numCycles": 13,
+          "numTiles": 63,
+          "numZPlanes": 19,
+          "numChannels": 4,
+          "regionWidth": 9,
+          "regionHeight": 7,
+          "tileWidth": 1920,
+          "tileHeight": 1440,
+          "tileOverlapX": 0.3,
+          "tileOverlapY": 0.3,
+          "tilingMode": "snakeRows",
+          "backgroundSubtractionMode": "min-min",
+          "deconvolution": "Microvolution",
+          "driftCompReferenceCycle": 2,
+          "driftCompReferenceChannel": 1,
+          "bestFocusReferenceCycle": 2,
+          "bestFocusReferenceChannel": 1,
+          "numSubTiles": 1,
+          "focusingOffset": 0,
+          "useFlatFieldCorrection": true,
+          "useBackgroundSubtraction": true,
+          "HandEstain": false,
+          "use3dDriftCompensation": true,
+          "useBleachMinimizingCrop": false,
+          "useBlindDeconvolution": false,
+          "useDiagnosticMode": false,
+          "useShadingCorrection": true
+        }
+    ],
+    "required": [
+        "version",
+        "name",
+        "dateProcessed",
+        "objectiveType",
+        "magnification",
+        "aperture",
+        "xyResolution",
+        "zPitch",
+        "wavelengths",
+        "bitness",
+        "numRegions",
+        "numCycles",
+        "numZPlanes",
+        "numChannels",
+        "regionWidth",
+        "regionHeight",
+        "tileWidth",
+        "tileHeight",
+        "tileOverlapX",
+        "tileOverlapY",
+        "tilingMode",
+        "driftCompReferenceCycle",
+        "driftCompReferenceChannel",
+        "bestFocusReferenceCycle",
+        "bestFocusReferenceChannel",
+        "numSubTiles"
+    ],
+    "properties": {
+        "version": {
+            "$id": "#/properties/version",
+            "type": "string",
+            "title": "The version schema",
+            "description": "Version of Akoya software",
+            "default": "",
+            "examples": [
+                "1.5.0.38"
+            ]
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "Experiment name",
+            "default": "",
+            "examples": [
+                "src_CX_19-002_CC2-spleen-A"
+            ]
+        },
+        "dateProcessed": {
+            "$id": "#/properties/dateProcessed",
+            "type": "string",
+            "title": "The dateProcessed schema",
+            "description": "Date of processing",
+            "default": "",
+            "examples": [
+                "2020-02-10T16:01:15.357-05:00[America/New_York]"
+            ]
+        },
+        "objectiveType": {
+            "$id": "#/properties/objectiveType",
+            "type": "string",
+            "title": "The objectiveType schema",
+            "description": "Objective type",
+            "default": "",
+            "examples": [
+                "air"
+            ]
+        },
+        "magnification": {
+            "$id": "#/properties/magnification",
+            "type": "integer",
+            "title": "The magnification schema",
+            "description": "Objective magnification",
+            "default": 0,
+            "examples": [
+                20
+            ]
+        },
+        "aperture": {
+            "$id": "#/properties/aperture",
+            "type": "number",
+            "title": "The aperture schema",
+            "description": "Aperture number",
+            "default": 0.0,
+            "examples": [
+                0.75
+            ]
+        },
+        "xyResolution": {
+            "$id": "#/properties/xyResolution",
+            "type": "number",
+            "title": "The xyResolution schema",
+            "description": "Lateral resolution",
+            "default": 0.0,
+            "examples": [
+                377.4463383838384
+            ]
+        },
+        "zPitch": {
+            "$id": "#/properties/zPitch",
+            "type": "number",
+            "title": "The zPitch schema",
+            "description": "Axial resolution",
+            "default": 0.0,
+            "examples": [
+                1500.0
+            ]
+        },
+        "wavelengths": {
+            "$id": "#/properties/wavelengths",
+            "type": "array",
+            "title": "The wavelengths schema",
+            "description": "Emission wavelengths",
+            "items": {
+                "type": "integer"
+            },
+            "default": [],
+            "examples": [
+                [
+                    358,
+                    488
+                ]
+            ]
+        },
+        "bitness": {
+            "$id": "#/properties/bitness",
+            "type": "integer",
+            "title": "The bitness schema",
+            "description": "Image bit depth",
+            "multipleOf": 2,
+            "default": 16,
+            "examples": [
+                16
+            ]
+        },
+        "numRegions": {
+            "$id": "#/properties/numRegions",
+            "type": "integer",
+            "title": "The numRegions schema",
+            "description": "Number of regions",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                1
+            ]
+        },
+        "numCycles": {
+            "$id": "#/properties/numCycles",
+            "type": "integer",
+            "title": "The numCycles schema",
+            "description": "Number of cycles",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "numZPlanes": {
+            "$id": "#/properties/numZPlanes",
+            "type": "integer",
+            "title": "The numZPlanes schema",
+            "description": "Number of z-planes",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                13
+            ]
+        },
+        "numChannels": {
+            "$id": "#/properties/numChannels",
+            "type": "integer",
+            "title": "The numChannels schema",
+            "description": "Number of channels",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                4
+            ]
+        },
+        "regionWidth": {
+            "$id": "#/properties/regionWidth",
+            "type": "integer",
+            "title": "The regionWidth schema",
+            "description": "Number of tiles in x direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "regionHeight": {
+            "$id": "#/properties/regionHeight",
+            "type": "integer",
+            "title": "The regionHeight schema",
+            "description": "Number of tiles in y direction",
+            "minimum": 1,
+            "default": 1,
+            "examples": [
+                9
+            ]
+        },
+        "tileWidth": {
+            "$id": "#/properties/tileWidth",
+            "type": "integer",
+            "title": "The tileWidth schema",
+            "description": "Tile width with overlap",
+            "default": 1,
+            "examples": [
+                1920
+            ]
+        },
+        "tileHeight": {
+            "$id": "#/properties/tileHeight",
+            "type": "integer",
+            "title": "The tileHeight schema",
+            "description": "Tile height with overlap",
+            "default": 1,
+            "examples": [
+                1440
+            ]
+        },
+        "tileOverlapX": {
+            "$id": "#/properties/tileOverlapX",
+            "type": "number",
+            "title": "The tileOverlapX schema",
+            "description": "Horizontal overlap between adjacent tiles in fractions of 1",
+            "default": 0.0,
+            "examples": [
+                0.3
+            ]
+        },
+        "tileOverlapY": {
+            "$id": "#/properties/tileOverlapY",
+            "type": "number",
+            "title": "The tileOverlapY schema",
+            "description": "Vertical overlap between adjacent tiles in fractions of 1",
+            "default": 0.0,
+            "examples": [
+                0.3
+            ]
+        },
+        "tilingMode": {
+            "$id": "#/properties/tilingMode",
+            "type": "string",
+            "title": "The tilingMode schema",
+            "description": "Tiling mode snake, grid, maybe something else",
+            "default": "",
+            "examples": [
+                "snakerows"
+            ]
+        },
+        "bestFocusReferenceCycle": {
+            "$id": "#/properties/bestFocusReferenceCycle",
+            "type": "integer",
+            "title": "The bestFocusReferenceCycle schema",
+            "description": "Cycle with reference channel",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                2
+            ]
+        },
+        "bestFocusReferenceChannel": {
+            "$id": "#/properties/referenceChannel",
+            "type": "integer",
+            "title": "The bestFocusReferenceChannel schema",
+            "description": "Channel to be used as a reference for processing and segmentation",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                1
+            ]
+        },
+        "driftCompReferenceCycle": {
+            "$id": "#/properties/driftCompReferenceCycle",
+            "type": "integer",
+            "title": "The driftCompReferenceCycle schema",
+            "description": "Cycle with reference channel",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                2
+            ]
+        },
+        "driftCompReferenceChannel": {
+            "$id": "#/properties/driftCompReferenceChannel",
+            "type": "integer",
+            "title": "The bestFocusReferenceChannel schema",
+            "description": "Channel to be used as a reference for image registration",
+            "default": 1,
+            "minimum": 1,
+            "examples": [
+                1
+            ]
+        },
+        "deconvolutionIterations": {
+            "$id": "#/properties/deconvolutionIterations",
+            "type": "integer",
+            "title": "The deconvolutionIterations schema",
+            "description": "TMC - Number of deconvolution iterations",
+            "default": 0,
+            "examples": [
+                25
+            ]
+        },
+        "deconvolutionModel": {
+            "$id": "#/properties/deconvolutionModel",
+            "type": "string",
+            "title": "The deconvolutionModel schema",
+            "description": "TMC - Deconvolution model",
+            "default": "",
+            "examples": [
+                "vectorial"
+            ]
+        },
+        "focusingOffset": {
+            "$id": "#/properties/focusingOffset",
+            "type": "integer",
+            "title": "The focusingOffset schema",
+            "description": "TMC - I have no idea what it is, usually 0",
+            "default": 0,
+            "examples": [
+                0
+            ]
+        }
+    },
+    "numSubTiles": {
+        "$id": "#/properties/numSubTiles",
+        "type": "integer",
+        "title": "The numSubTiles schema",
+        "description": "Not sure what subtile is, should be 1",
+        "default": 1,
+        "maximum": 1,
+        "examples": [
+            1
+        ]
+    },
+    "additionalProperties": true
+}
+"""
+
 
 dataset_schema = json.loads(_dataset_schema_str)
-experiment_schema = json.loads(_experiment_schema_str)
+experiment_1_7_schema = json.loads(_experiment_1_7_schema_str)
+experiment_1_5_schema = json.loads(_experiment_1_5_schema_str)
+
+
+def get_experiment_metadata_schema(metadata: dict):
+    ver = metadata.get("version", None)
+    if ver is None:
+        msg = "Could not find field version in the experiment.json metadata"
+        raise ValueError(msg)
+
+    if version.parse(ver) >= version.parse("1.7") < version.parse("1.8"):
+        return experiment_1_7_schema
+    elif version.parse(ver) >= version.parse("1.5") < version.parse("1.7"):
+        return experiment_1_5_schema
+    else:
+        msg = (f"The version {str(ver)} of experiment.json is not supported."
+               + "Supported version are 1.5 and 1.7")
+        raise NotImplementedError(msg)

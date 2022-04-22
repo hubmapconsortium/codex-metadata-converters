@@ -7,13 +7,15 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
+from packaging import version
 
 import jsonschema
 import numpy as np
 import pandas as pd
 
 from dataset_listing import create_listing_for_each_cycle_region
-from schema_container import dataset_schema, experiment_schema
+from schema_container import dataset_schema, get_experiment_metadata_schema
+
 
 
 def make_dir_if_not_exists(dir_path: Path):
@@ -115,7 +117,7 @@ def alpha_num_order(string: str) -> str:
 
 
 def get_img_dirs(dataset_path: Path) -> List[Path]:
-    img_dirs = glob(str(dataset_path / "cyc???_reg???*"))
+    img_dirs = glob(str(dataset_path / "?yc*_?eg*"))
     if img_dirs == []:
         msg = "No directories with images found. They must follow this pattern cyc001_reg001"
         raise ValueError(msg)
@@ -300,6 +302,12 @@ def map_segmentation_meta(seg_metadata: dict) -> Dict[str, Dict[str, int]]:
 
 
 def map_experiment_meta(exp_metadata: dict) -> Dict[str, Any]:
+    ver = exp_metadata["version"]
+    if version.parse(ver) >= version.parse("1.7") < version.parse("1.8"):
+        bit_depth_key = "bitDepth"
+    elif version.parse(ver) >= version.parse("1.5") < version.parse("1.7"):
+        bit_depth_key = "bitness"
+
     mapped_exp_meta = {
         "ImmersionMedium": convert_immersion_medium(exp_metadata["objectiveType"]),
         "NominalMagnification": exp_metadata["magnification"],
@@ -310,7 +318,7 @@ def map_experiment_meta(exp_metadata: dict) -> Dict[str, Any]:
         "ResolutionYUnit": "nm",
         "ResolutionZ": exp_metadata["zPitch"],
         "ResolutionZUnit": "nm",
-        "BitDepth": exp_metadata["bitDepth"],
+        "BitDepth": exp_metadata[bit_depth_key],
         "NumRegions": exp_metadata["numRegions"],
         "NumCycles": exp_metadata["numCycles"],
         "NumZPlanes": exp_metadata["numZPlanes"],
@@ -502,6 +510,8 @@ def convert_metadata(dataset_path: Path, out_path: Path):
     seg_metadata = read_json(seg_path)
 
     logger.debug("Reading experiment data")
+
+    experiment_schema = get_experiment_metadata_schema(exp_metadata)
     jsonschema.validate(exp_metadata, experiment_schema)
     mapped_exp_meta = map_experiment_meta(exp_metadata)
     mapped_seg_meta = map_segmentation_meta(seg_metadata)
