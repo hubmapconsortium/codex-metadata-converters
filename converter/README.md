@@ -6,6 +6,8 @@ Requires
 3. Access to the image directories with images in format. 
 Directory name format`cyc001_reg001`, image name format `1_00001_Z001_CH1.tif`.
 
+If your `experiment.json` version is `1.5` or does not contain `exposureTimes` field, you need to also 
+have `exposure_times.txt` file in the dataset directory. 
 
 The converter is packed into an executable file inside the compiled directory.
 

@@ -6,7 +6,7 @@ import traceback
 import xml.etree.ElementTree as ET
 from glob import glob
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Union
 from packaging import version
 
 import jsonschema
@@ -66,21 +66,15 @@ def str_list_to_paths(str_list: List[str]):
     return [Path(read_str(p)) for p in str_list]
 
 
-def read_int(field_name: str, in_str: str) -> int:
+def read_int_if_can(in_str: str) -> Union[int, str]:
     if isinstance(in_str, int):
         return in_str
     elif isinstance(in_str, float):
         return round(in_str)
-    if in_str.isdigit():
-        return int(in_str)
-    else:
-        msg = (
-            "Tried to read a number from the field "
-            + field_name
-            + "but it is not an integer "
-            + in_str
-        )
-        raise ValueError(msg)
+    try:
+        return round(float(in_str))
+    except ValueError:
+        return in_str
 
 
 def check_metadata_present(dataset_path: Path):
@@ -262,7 +256,7 @@ def read_missing1(missing1_meta_path: Path, total_num_channels: int) -> pd.DataF
         rows_with_missing = [r + 1 for r in rows_with_missing]
         msg = (
             "The file missing1.xlsx contains empty or missing values."
-            + f"Please check the following rows: {str(rows_with_missing)}"
+            + f" Please check the following rows: {str(rows_with_missing)}"
         )
         raise ValueError(msg)
 
@@ -288,7 +282,6 @@ def read_missing1(missing1_meta_path: Path, total_num_channels: int) -> pd.DataF
 
 
 def map_segmentation_meta(seg_metadata: dict) -> Dict[str, Dict[str, int]]:
-    print(seg_metadata)
     mapped_seg_meta = {
         "NuclearStainForSegmentation": {
             "CycleID": seg_metadata["nuclearStainCycle"],
@@ -375,6 +368,31 @@ def get_nuc_and_membr_markers(
         msg = "Membrane stain provided in segmentation.json is not present in missing1.xlsx"
         raise ValueError(msg)
     return nuclear_stain, membrane_stain
+
+
+def read_exposure_times_table(exposure_times_table_path: Path) -> Union[None, List[List[Union[str, int]]]]:
+    if not exposure_times_table_path.exists():
+        return None
+    exp_times = pd.read_csv(exposure_times_table_path, header=None)
+    exposure_times = []
+    for row in range(0, len(exp_times)):
+        this_cycle_exposure = exp_times.loc[row, :].to_list()
+        this_cycle_exposure = [read_int_if_can(t) for t in this_cycle_exposure]
+        exposure_times.append(this_cycle_exposure)
+    return exposure_times
+
+
+def get_exposure_times(exp_metadata: dict, exposure_times_table: Union[None, pd.DataFrame] = None) -> List[List[Union[str, int]]]:
+    if exp_metadata.get("exposureTimes", None) is not None:
+        exposure_times = exp_metadata["exposureTimes"]["exposureTimesArray"]
+    else:
+        if exposure_times_table is not None:
+            exposure_times = exposure_times_table
+        else:
+            msg = ("Tried to look in the experiment.json and exposure_times.txt"
+                   + " But did not find exposure time information.")
+            raise ValueError(msg)
+    return exposure_times
 
 
 def create_channel_details(
@@ -518,6 +536,7 @@ def convert_metadata(dataset_path: Path, out_path: Path):
     seg_path = dataset_path / "segmentation.json"
     missing1_meta_path = dataset_path / "missing1.xlsx"
     missing2_meta_path = dataset_path / "missing2.xlsx"
+    exposure_times_table_path = dataset_path / "exposure_times.txt"
 
     exp_metadata = read_json(exp_path)
     seg_metadata = read_json(seg_path)
@@ -528,7 +547,9 @@ def convert_metadata(dataset_path: Path, out_path: Path):
     jsonschema.validate(exp_metadata, experiment_schema)
     mapped_exp_meta = map_experiment_meta(exp_metadata)
     mapped_seg_meta = map_segmentation_meta(seg_metadata)
-    exposure_times = exp_metadata["exposureTimes"]["exposureTimesArray"]
+
+    exposure_times_table = read_exposure_times_table(exposure_times_table_path)
+    exposure_times = get_exposure_times(exp_metadata, exposure_times_table)
 
     total_num_channels = mapped_exp_meta["NumCycles"] * mapped_exp_meta["NumChannels"]
     num_channels_per_cycle = mapped_exp_meta["NumChannels"]
