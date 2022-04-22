@@ -288,6 +288,7 @@ def read_missing1(missing1_meta_path: Path, total_num_channels: int) -> pd.DataF
 
 
 def map_segmentation_meta(seg_metadata: dict) -> Dict[str, Dict[str, int]]:
+    print(seg_metadata)
     mapped_seg_meta = {
         "NuclearStainForSegmentation": {
             "CycleID": seg_metadata["nuclearStainCycle"],
@@ -335,7 +336,7 @@ def map_experiment_meta(exp_metadata: dict) -> Dict[str, Any]:
 
 
 def get_nuc_and_membr_markers(
-    m1: pd.DataFrame, num_channels_per_cycle: int
+    m1: pd.DataFrame, num_channels_per_cycle: int, seg_meta: dict
 ) -> Tuple[Dict[str, List[Dict[str, int]]], Dict[str, List[Dict[str, int]]]]:
     nuclear_stain = {"NuclearStain": []}
     membrane_stain = {"MembraneStain": []}
@@ -361,6 +362,18 @@ def get_nuc_and_membr_markers(
             ch_i = 1
         else:
             ch_i += 1
+    if nuclear_stain["NuclearStain"] == []:
+        msg = "Nuclear stain channels is not found in missing1.xlsx"
+        raise ValueError(msg)
+    if membrane_stain["MembraneStain"] == []:
+        msg = "Membrane stain channel is not found in missing1.xlsx"
+        raise ValueError(msg)
+    if not seg_meta["NuclearStainForSegmentation"] in nuclear_stain["NuclearStain"]:
+        msg = "Nuclear stain provided in segmentation.json is not present in missing1.xlsx"
+        raise ValueError(msg)
+    if not seg_meta["MembraneStainForSegmentation"] in membrane_stain["MembraneStain"]:
+        msg = "Membrane stain provided in segmentation.json is not present in missing1.xlsx"
+        raise ValueError(msg)
     return nuclear_stain, membrane_stain
 
 
@@ -532,16 +545,17 @@ def convert_metadata(dataset_path: Path, out_path: Path):
     bin_list, gain_list = get_bin_gain_from_embedded_meta(listing)
 
     logger.debug("Populating ChannelDetails")
+
+    nuclear_stain, membrane_stain = get_nuc_and_membr_markers(
+        m1, num_channels_per_cycle, mapped_seg_meta
+    )
+
     channel_list = create_channel_details(
         m1, bin_list, gain_list, exposure_times, num_channels_per_cycle
     )
     channel_metadata = {
         "ChannelDetails": {"ChannelDetailsArray": [ch.__dict__ for ch in channel_list]}
     }
-
-    nuclear_stain, membrane_stain = get_nuc_and_membr_markers(
-        m1, num_channels_per_cycle
-    )
 
     logger.debug("Combining collected metadata")
     metadata_dicts = (

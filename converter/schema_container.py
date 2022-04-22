@@ -2018,7 +2018,7 @@ def get_experiment_metadata_schema(metadata: dict):
     if ver is None:
         msg = "Could not find field version in the experiment.json metadata"
         raise ValueError(msg)
-
+    print(version.parse(ver))
     if version.parse(ver) >= version.parse("1.7") < version.parse("1.8"):
         return experiment_1_7_schema
     elif version.parse(ver) >= version.parse("1.5") < version.parse("1.7"):
