@@ -39,9 +39,10 @@ single_plane_quantification=true
 
 
 def find_codex_datasets(base_dir: Path) -> Iterable[Path]:
+    if (base_dir / experiment_json_path).is_file():
+        yield base_dir
     for subdir in base_dir.iterdir():
         if (subdir / experiment_json_path).is_file():
-            print("Found", subdir)
             yield subdir
 
 
@@ -57,7 +58,8 @@ class DatasetFixer:
             print("Renaming", old_path, "to", new_path)
             old_path.rename(new_path)
 
-    def fix_image_dir(self, image_dir: Path, region_mapping: Dict[int, int]):
+    def fix_image_dir(self, image_dir: Path, region_mapping: Dict[int, int],
+                      region_according_to_dir: int):
         for f in image_dir.iterdir():
             if m := image_or_bcf_pattern.match(f.name):
                 old_region = int(m.group("region"))
@@ -65,6 +67,8 @@ class DatasetFixer:
                 if old_region in region_mapping:
                     new_region = region_mapping[old_region]
                 elif len(region_mapping) == 1 and old_region == 1:
+                    new_region = 1
+                elif region_according_to_dir == 1:
                     new_region = 1
                 else:
                     message = f"Region {old_region} not in region mapping {pformat(region_mapping)} for file {f}, directory {image_dir}"
@@ -118,7 +122,8 @@ class DatasetFixer:
         # TODO: fix; just needs to work well enough
         for child in dataset_raw_dir.iterdir():
             if cycle_dir_pattern.match(child.name) or h_and_e_dir_pattern.match(child.name):
-                self.fix_image_dir(child, region_mapping)
+                region_according_to_dir = int(cycle_dir_pattern.match(child.name).group("region"))
+                self.fix_image_dir(child, region_mapping, region_according_to_dir)
 
         # need an actual list because we're going to include this
         # in a data structure serialized as JSON
@@ -185,6 +190,7 @@ class DatasetFixer:
 
 def fix_stanford_codex(base_dir: Path, pretend: bool):
     for dataset_dir in find_codex_datasets(base_dir):
+        print(f'fixing {dataset_dir}')
         fixer = DatasetFixer(dataset_dir, pretend)
         fixer.fix_dataset()
 
